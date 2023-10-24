@@ -21,4 +21,7 @@ export default class TaskService implements IService<ITask> {
     return this._task.create(obj);
   }
 
+  public async read(): Promise<ITask[]> {   
+    return this._task.read();
+  }
 }

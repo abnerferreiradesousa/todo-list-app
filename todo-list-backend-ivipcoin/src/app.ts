@@ -1,3 +1,4 @@
+import 'express-async-errors';
 import express from 'express';
 import taskRouter from './routes/task';
 import userRouter from './routes/user';
