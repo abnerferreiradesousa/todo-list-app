@@ -1,13 +1,13 @@
 import jwt from 'jsonwebtoken';
-import { IUser } from '../interfaces/IUser';
+import { UserOmitPassword } from '../interfaces/IUser';
 
-export type User= Omit<IUser, 'password'>;
 
-const generateJWT = (payload: User): string => {
+const generateJWT = (payload: UserOmitPassword): string => {
 	const token = jwt.sign(
-		{data: payload},
+		{data: { email: payload.email, userId: payload.userId }},
 		process.env.JWT_SECRET = 'hulkEsmaga',
-		{expiresIn: '1d'});
+		// {expiresIn: '1d'}
+		);
 	return token;
 };
 

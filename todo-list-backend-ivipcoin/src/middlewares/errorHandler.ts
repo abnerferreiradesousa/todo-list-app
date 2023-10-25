@@ -12,7 +12,7 @@ const errorHandler: ErrorRequestHandler = (
 ) => {
 
   if(err instanceof ZodError) {
-    return res.status(400).json({ messge: err.issues });
+    return res.status(400).json({ message: err.issues[0].message });
   }
 
   const messageAsErrorTYpe = err.message as keyof typeof ErrorTypes;

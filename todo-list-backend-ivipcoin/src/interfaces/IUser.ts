@@ -1,17 +1,30 @@
+import { Types } from 'mongoose';
 import { z } from 'zod';
 
 const UserZodSchema = z.object({
-  firstName: z.string({ invalid_type_error: "First name must be a string!" })
-    .min(3, { message: "First name must have min 3 characters!" }),  
-  secondName: z.string({ invalid_type_error: "Second name must be a string!" })
-    .min(5, { message: "Second name must have min 3 characters!" }),
+  email: z.string({ invalid_type_error: "Deve ser um email!" })
+    .email({ message: 'Email inválido!' }),
+  password: z.string({ invalid_type_error: "Senha deve ser um texto!" })
+    .min(6, { message: "Senha deve ter no mínimo 6 caracteres!" }),
 });
 
 type IUser = z.infer<typeof UserZodSchema>;
-type IUserWithToken = IUser & { token: string };
+
+interface IUserWithToken {
+  user: IUser & { userId: string }
+  token: string
+}
+
+type TokenJWT = Pick<IUserWithToken, 'token' >;
+type UserObjectId = IUser & { _id: Types.ObjectId }
+type UserStrId = IUser & { userId: string }
+type UserOmitPassword = Omit<UserStrId, 'password'>;
 
 export {
   UserZodSchema,
   IUser,
-  IUserWithToken
+  IUserWithToken,
+  TokenJWT,
+  UserOmitPassword,
+  UserObjectId,
 }
