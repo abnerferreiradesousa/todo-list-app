@@ -10,7 +10,8 @@ export interface IUserWithToken {
 }
 
 export interface IErrorHandler extends Error {
-	status: number;
+	status: number
 }
+
 
 export type TokenJWT = Pick<IUserWithToken, 'token' >;

@@ -15,7 +15,6 @@ const FormUser = ({ title, buttonText, handleUser, linkText, linkPath, errorMess
     setEmailError(false);
     setPasswordError(false);
 
-    const validateEmailRegex = /^\S+@\S+\.\S+$/;
     const isValidEmail = email == '';
     if (isValidEmail) {
       setEmailError(true);

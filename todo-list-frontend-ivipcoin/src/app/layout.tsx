@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Layout from './components/Layout'
 import Provider from '@/contextAPI/Provider'
 
 export const metadata: Metadata = {
@@ -15,7 +14,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Provider>
+        <Provider> 
           {children}
         </Provider>
       </body>

@@ -12,19 +12,25 @@ import { ITask } from '../types/ITask';
 const TaskList = () => {
   const { userInfo } = useContext(Context);
   const router = useRouter();
-  const { tasks, setTasks, setTasksDefault, setTaskToEdit } = useContext(Context);
+  const { tasks, setTasks, setTasksDefault, setTaskToEdit, setUserInfo } = useContext(Context);
   const [currentPage, setCurrentPage] = useState(1);
-  const [tasksPerPage, _setTasksPerPage] = useState(8);
+  const [tasksPerPage, _setTasksPerPage] = useState(4);
 
   useEffect(() => {
+
+    const userStr = localStorage.getItem('userInfo');
+    const userObj = userStr ? JSON.parse(userStr) : userInfo;
+    
+    setUserInfo({  ...userObj, user: { email: userObj.email } });
     fetch('http://localhost:8000/tasks', {
       method: 'GET',
-      headers: { Authorization: userInfo.token }
+      headers: { Authorization: userObj.token }
     })
       .then(response => response.json())
-      .then(data => {
-        setTasks(data);
-        setTasksDefault(data);
+      .then((data: ITask[]) => {
+        const reversedData = Array.isArray(data) ? data.reverse() : [];
+        setTasks(reversedData);
+        setTasksDefault([...reversedData]);
       });
   }, []);
 

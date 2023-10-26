@@ -21,11 +21,16 @@ export default function Home() {
         if (data.message) {
           setErrorMessage(data.message);
           return;
-        }
+        } 
+
         setUserInfo({
           ...data,
           user: { email }
         });
+        localStorage.setItem('userInfo', JSON.stringify({
+          email,
+          token: data.token
+        }))
         router.push('/TaskList');
       }));
   }

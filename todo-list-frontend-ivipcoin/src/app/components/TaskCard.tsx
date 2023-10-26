@@ -7,15 +7,13 @@ import { Checkbox, Grid, IconButton, Typography } from '@mui/material';
 import { DeleteOutlined } from '@mui/icons-material';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import { Context } from '@/contextAPI/Context';
-import { useRouter } from 'next/navigation';
-import { blue, green, orange, red } from '@mui/material/colors';
+import { green, orange, red } from '@mui/material/colors';
 
 
 const TaskCard = ({ task, handleEdit }: ITaskCardProps) => {
   const { userInfo, tasks, setTasks, setTasksDefault } = useContext(Context);
   const [checked, setChecked] = useState(task.isDone);
   const { errorMessage, setErrorMessage } = useContext(Context);
-  const router = useRouter();
 
   useEffect(() => {
     setChecked(task.isDone);
@@ -76,19 +74,21 @@ const TaskCard = ({ task, handleEdit }: ITaskCardProps) => {
             />
           }
           title={
-            <Typography variant='h4' sx={{ textDecoration: `${checked ? 'line-through' : 'none'}` }}>
+            <Typography variant='h5' sx={{ textDecoration: `${checked ? 'line-through' : 'none'}` }}>
               {task.title}
             </Typography>
           }
         />
         <CardContent>
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            sx={{ textDecoration: `${checked ? 'line-through' : 'none'}` }}
-          >
-            {task.details}
-          </Typography>
+          <Grid item flexGrow={1}>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              sx={{ textDecoration: `${checked ? 'line-through' : 'none'}` }}
+            >
+              {task.details}
+            </Typography>
+          </Grid>
           <Grid item display={'flex'} justifyContent={'end'} marginTop={2}>
             <IconButton onClick={() => handleDelete(task._id)}>
               <DeleteOutlined fontSize='medium' sx={{ color: red[500] }} />

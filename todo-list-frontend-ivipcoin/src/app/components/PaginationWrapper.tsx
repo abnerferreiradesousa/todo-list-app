@@ -9,7 +9,7 @@ const PaginationWrapper = ({ totalTasks, postsPerPage, setCurrentPage }: { total
   };
 
   return (
-    <Grid container display={'flex'} justifyContent={'center'} marginTop={4}>
+    <Grid container display={'flex'} justifyContent={'center'} marginY={4}>
       <Stack spacing={2}>
         <Pagination
           count={Math.ceil(totalTasks / postsPerPage)}

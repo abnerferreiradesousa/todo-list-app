@@ -1,8 +1,8 @@
 'use client'
 import * as React from 'react';
-import { 
+import {
   alpha, styled, useTheme, Box, Drawer, CssBaseline, Toolbar, List, Typography, Divider,
-  IconButton, ListItem, ListItemText, Grid, InputBase, ListItemButton, 
+  IconButton, ListItem, ListItemText, Grid, InputBase, ListItemButton, Link,
 } from '@mui/material';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -16,6 +16,7 @@ import { AddCircleOutlineOutlined, SubjectOutlined } from '@mui/icons-material';
 import LogoutSharpIcon from '@mui/icons-material/LogoutSharp';
 import { usePathname, useRouter } from 'next/navigation';
 import Filters from './Filters';
+import NotAuth from './NotAuth';
 
 const drawerWidth = 240;
 
@@ -107,11 +108,12 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 export default function Layout({ children }: React.PropsWithChildren) {
+  const { setTasks, tasksDefault, userInfo, setTaskToEdit } = React.useContext(Context);
   const theme = useTheme();
   const router = useRouter();
   const pathname = usePathname();
   const [open, setOpen] = React.useState(true);
-  const { setTasks, tasksDefault, userInfo, setTaskToEdit } = React.useContext(Context);
+  const [isAuth, setIsAuth] = React.useState(false);
 
   const handleDrawerOpen = () => setOpen(true);
 
@@ -123,6 +125,11 @@ export default function Layout({ children }: React.PropsWithChildren) {
       (task: ITask) => task.title.toLowerCase().includes(searchValue));
     setTasks(filteredTasks);
   }
+
+  React.useEffect(() => {
+    const userAuth = localStorage.getItem('userInfo');
+    setIsAuth(userAuth !== null);
+  }, []);
 
   const menuItems = [
     {
@@ -148,10 +155,15 @@ export default function Layout({ children }: React.PropsWithChildren) {
     {
       text: 'Sair',
       icon: <LogoutSharpIcon color='primary' />,
-      path: '/'
+      path: '/',
+      onClick: (path: string) => {
+        localStorage.removeItem('userInfo');
+        router.push(path);
+      }
     },
   ]
 
+  if (!isAuth) return <NotAuth />
   return (
     <Box sx={{ display: 'flex' }} height={'100vh'}>
       <CssBaseline />
@@ -225,7 +237,7 @@ export default function Layout({ children }: React.PropsWithChildren) {
         <DrawerHeader />
         {
           pathname == '/CreateTask'
-          || ( <Filters /> )
+          || (<Filters />)
         }
         {children}
       </Main>

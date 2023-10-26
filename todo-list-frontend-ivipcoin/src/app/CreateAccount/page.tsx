@@ -23,14 +23,15 @@ const CreateAccount = () => {
         if (data.message) {
           setErrorMessage(data.message);
           return;
-        } else {
-          setUserInfo(data);
-          router.push('/TaskList');
         }
+
+        setUserInfo(data);
+        localStorage.setItem('userInfo', JSON.stringify({
+          email,
+          token: data.token
+        }))
+        router.push('/TaskList');
       }));
-
-
-
   }
 
   return (
