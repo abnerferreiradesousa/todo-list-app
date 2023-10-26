@@ -10,12 +10,11 @@
   - `git clone git@github.com:abnerferreiradesousa/todo-list-app.git`;
     - Entre na pasta do repositório:
       - `cd todo-list-app`
-2. Você verá duas pastas `todo-list-backend-ivipcoin` e `todo-list-frontend-ivipcoin`:
-- 2.1 - Entre na primeira pasta `cd todo-list-backend-ivipcoin`;
-- 2.2 - Instale as dependências `npm install`;
-- 2.3 - Inicie a aplicação `npm start`;
-- 2.4 - Repita o mesmo processo para pasta `todo-list-frontend-ivipcoin`;
-3. Acesse a url `http://localhost:3000`.
+2. Inicie a aplicação com o comando:
+ - `docker-compose up -d --build`
+   - *Obs: Este comando será responsável por criar três cointainers Docker: o primeiro para iniciar o banco de dados MongoDB, o segundo para iniciar o backend, e por fim, o terceiro para iniciar o frontend e disponilizar uma URL para acesso da aplicação e não deve levar mais que 3 minutos.*
+
+3. Acesse a aplicação usando essa url `http://localhost:3000`.
 
 </details>
 
