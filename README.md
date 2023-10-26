@@ -26,10 +26,11 @@
     <li>👉 TypeScript</li>
     <li>👉 React.js</li>
     <li>👉 Material UI</li>
-    <li>👉 Banco de Dados MongoDB</li>
+    <li>👉 MongoDB</li>
     <li>👉 Node.js</li>
     <li>👉 Express.js</li>
     <li>👉 ODM Mongoose</li>
+    <li>👉 Docker</li>
     <li>👉 Mocha, Chai, Sinon, Jest para testes unitários.</li>
   </ul>
 
