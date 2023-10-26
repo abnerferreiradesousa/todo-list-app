@@ -1,0 +1,22 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: ./todo-list-frontend-ivipcoin
+    ports:
+      - "3000:3000"
+
+  backend:
+    build:
+      context: ./todo-list-backend-ivipcoin
+    ports:
+      - "8000:8000"
+    environment:
+      MONGODB_URI: "mongodb://mongo:27017/todoList"
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:4
+    ports:
+      - "27017:27017"
