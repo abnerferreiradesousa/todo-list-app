@@ -35,7 +35,7 @@ export default class TaskModel {
   } 
 
   public async delete(id: string) {
-    await this._model.findByIdAndRemove(id);
+    await this._model.findByIdAndDelete({ _id: id });
   }
 
 }

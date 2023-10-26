@@ -7,6 +7,8 @@ import { IUserWithToken } from "@/app/types/IUser";
 const Provider = ({ children }: PropsWithChildren) => {
   const [search, setSearch] = useState<string>("");
   const [tasks, setTasks] = useState<ITask[]>([]);
+  const [tasksDefault, setTasksDefault] = useState<ITask[]>([]);
+  const [errorMessage, setErrorMessage] = useState("")
   const [userInfo, setUserInfo] = useState<IUserWithToken>({
     user: {
       _id: '',
@@ -15,7 +17,6 @@ const Provider = ({ children }: PropsWithChildren) => {
     },
     token: ''
   });
-  const [tasksDefault, setTasksDefault] = useState<ITask[]>([]);
   const [taskToEdit, setTaskToEdit] = useState<ITask & { isEditing: boolean }>({
     _id: 0,
     title: '',
@@ -29,7 +30,8 @@ const Provider = ({ children }: PropsWithChildren) => {
     tasks, setTasks,
     tasksDefault, setTasksDefault,
     taskToEdit, setTaskToEdit,
-    userInfo, setUserInfo
+    userInfo, setUserInfo,
+    errorMessage, setErrorMessage
   }
 
   return (

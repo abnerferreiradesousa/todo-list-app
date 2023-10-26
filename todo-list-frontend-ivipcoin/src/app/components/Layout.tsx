@@ -1,29 +1,21 @@
 'use client'
 import * as React from 'react';
-import { alpha, styled, useTheme } from '@mui/material/styles';
-import { Box } from '@mui/material';
-import Drawer from '@mui/material/Drawer';
-import CssBaseline from '@mui/material/CssBaseline';
+import { 
+  alpha, styled, useTheme, Box, Drawer, CssBaseline, Toolbar, List, Typography, Divider,
+  IconButton, ListItem, ListItemText, Grid, InputBase, ListItemButton, 
+} from '@mui/material';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import { FormControlLabel, Grid, InputBase, ListItemButton, Radio, RadioGroup } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { Context } from '@/contextAPI/Context';
 import { ITask } from '../types/ITask';
 import { AddCircleOutlineOutlined, SubjectOutlined } from '@mui/icons-material';
 import LogoutSharpIcon from '@mui/icons-material/LogoutSharp';
 import { usePathname, useRouter } from 'next/navigation';
-import { red } from '@mui/material/colors';
+import Filters from './Filters';
 
 const drawerWidth = 240;
 
@@ -76,7 +68,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
@@ -111,7 +102,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
 }));
@@ -121,29 +111,16 @@ export default function Layout({ children }: React.PropsWithChildren) {
   const router = useRouter();
   const pathname = usePathname();
   const [open, setOpen] = React.useState(true);
-  const { setTasks, tasksDefault, userInfo } = React.useContext(Context);
+  const { setTasks, tasksDefault, userInfo, setTaskToEdit } = React.useContext(Context);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+  const handleDrawerOpen = () => setOpen(true);
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+  const handleDrawerClose = () => setOpen(false);
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     const searchValue = e.target.value;
     const filteredTasks = tasksDefault.filter(
       (task: ITask) => task.title.toLowerCase().includes(searchValue));
-    setTasks(filteredTasks);
-  }
-
-  const handleFilterDefaultList = () => {
-    setTasks(tasksDefault);
-  }
-
-  const handleChangeRadio = (IsDone: boolean) => {
-    const filteredTasks = tasksDefault.filter((task: ITask) => task.isDone === IsDone);
     setTasks(filteredTasks);
   }
 
@@ -156,7 +133,17 @@ export default function Layout({ children }: React.PropsWithChildren) {
     {
       text: 'Criar Tarefa',
       icon: <AddCircleOutlineOutlined color='primary' />,
-      path: '/CreateTask'
+      path: '/CreateTask',
+      onClick: (path: string) => {
+        setTaskToEdit({
+          _id: 0,
+          title: '',
+          details: '',
+          isEditing: false,
+          isDone: false
+        });
+        router.push(path);
+      }
     },
     {
       text: 'Sair',
@@ -220,7 +207,11 @@ export default function Layout({ children }: React.PropsWithChildren) {
         </Typography>
         <List>
           {menuItems.map((item) => (
-            <ListItem key={item.text} onClick={() => router.push(item.path)} disablePadding>
+            <ListItem key={item.text} onClick={
+              () => item.onClick
+                ? item.onClick(item.path)
+                : router.push(item.path)}
+              disablePadding>
               <ListItemButton>
                 <ListItemIcon color={'secondary'}>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.text} />
@@ -234,31 +225,7 @@ export default function Layout({ children }: React.PropsWithChildren) {
         <DrawerHeader />
         {
           pathname == '/CreateTask'
-          || (
-            <Grid container display={'flex'} alignItems={'center'} gap={2} marginBottom={2}>
-              <Typography>Filtros: </Typography>
-              <RadioGroup row>
-                <FormControlLabel
-                  value='todas'
-                  onChange={handleFilterDefaultList}
-                  control={<Radio color='primary' />}
-                  label="Todas"
-                />
-                <FormControlLabel
-                  value='finalizadas'
-                  onChange={() => handleChangeRadio(true)}
-                  control={<Radio color='primary' />}
-                  label="Finalizadas"
-                />
-                <FormControlLabel
-                  value='não finalizadas'
-                  onChange={() => handleChangeRadio(false)}
-                  control={<Radio color='primary' />}
-                  label="Não Finalizadas"
-                />
-              </RadioGroup>
-            </Grid>
-          )
+          || ( <Filters /> )
         }
         {children}
       </Main>

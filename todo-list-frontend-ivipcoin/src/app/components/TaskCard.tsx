@@ -7,11 +7,15 @@ import { Checkbox, Grid, IconButton, Typography } from '@mui/material';
 import { DeleteOutlined } from '@mui/icons-material';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import { Context } from '@/contextAPI/Context';
+import { useRouter } from 'next/navigation';
+import { blue, green, orange, red } from '@mui/material/colors';
 
 
 const TaskCard = ({ task, handleEdit }: ITaskCardProps) => {
   const { userInfo, tasks, setTasks, setTasksDefault } = useContext(Context);
   const [checked, setChecked] = useState(task.isDone);
+  const { errorMessage, setErrorMessage } = useContext(Context);
+  const router = useRouter();
 
   useEffect(() => {
     setChecked(task.isDone);
@@ -21,63 +25,47 @@ const TaskCard = ({ task, handleEdit }: ITaskCardProps) => {
     const isDone = e.target.checked;
     setChecked(e.target.checked);
 
-    await fetch(`http://localhost:8000/tasks/${id}`, {
+    fetch(`http://localhost:8000/tasks/${id}`, {
       method: 'PUT',
       headers: {
         Authorization: userInfo.token,
         'Content-type': 'application/json'
       },
       body: JSON.stringify({ isDone })
-    });
-
-    const updatedTasks = tasks.map((t) => (t._id === id ? { ...t, isDone: isDone } : t));
-    setTasks(updatedTasks);
-    setTasksDefault(updatedTasks);
+    }).then((response) => response.json())
+      .then(((data: any) => {
+        if (data.message) {
+          setErrorMessage(data.message);
+          return;
+        }
+        const updatedTasks = tasks.map((t) => (t._id === id ? { ...t, isDone: isDone } : t));
+        setTasks(updatedTasks);
+        setTasksDefault(updatedTasks);
+      }));
   };
 
   const handleDelete = async (id: number) => {
-    await fetch('http://localhost:8000/tasks/' + id, {
+    console.log(id, userInfo.token)
+    fetch('http://localhost:8000/tasks/' + id, {
       method: 'DELETE',
       headers: {
         Authorization: userInfo.token,
-        'Content-type': 'application/json'
       },
-    });
-
-    const newTasks = tasks.filter((task) => task._id != id);
-    setTasks(newTasks);
-    setTasksDefault(newTasks);
+    }).then((response) => response.json())
+      .then(((data: any) => {
+        if (data.message) {
+          setErrorMessage(data.message);
+          return;
+        }
+        const newTasks = tasks.filter((task) => task._id != id);
+        setTasks(newTasks);
+        setTasksDefault(newTasks);
+      }));
   }
 
-  let ultimoNumero = -1; // Inicialize com um valor impossível
-
-  function gerarNumeroNaoConsecutivo() {
-    const min = 0;
-    const max = 4;
-    let numeroAleatorio;
-
-    do {
-      numeroAleatorio = Math.floor(Math.random() * (max - min + 1)) + min;
-    } while (numeroAleatorio === ultimoNumero);
-
-    ultimoNumero = numeroAleatorio; // Atualize o último número gerado
-    return numeroAleatorio;
-  }
-
-  // Exemplo de uso:
-  for (let i = 0; i < 10; i++) {
-    const numero = gerarNumeroNaoConsecutivo();
-    console.log(numero);
-  }
-
-
-  const handleColor = (): string => {
-    const cores = ['#4285F4', '#DB4437', '#F4B400', '#0F9D58'];
-    return cores[gerarNumeroNaoConsecutivo()];
-  }
 
   return (
-    <Grid item borderLeft={24} borderRight={24} borderColor={handleColor()}>
+    <Grid item borderLeft={6} borderRight={6} borderColor={green[500]}>
       <Card elevation={20}>
         <CardHeader
           action={
@@ -103,10 +91,10 @@ const TaskCard = ({ task, handleEdit }: ITaskCardProps) => {
           </Typography>
           <Grid item display={'flex'} justifyContent={'end'} marginTop={2}>
             <IconButton onClick={() => handleDelete(task._id)}>
-              <DeleteOutlined color='primary' />
+              <DeleteOutlined fontSize='medium' sx={{ color: red[500] }} />
             </IconButton>
             <IconButton onClick={() => handleEdit(task)}>
-              <DriveFileRenameOutlineIcon color='primary' />
+              <DriveFileRenameOutlineIcon fontSize='medium' sx={{ color: orange[500] }} />
             </IconButton>
           </Grid>
         </CardContent>

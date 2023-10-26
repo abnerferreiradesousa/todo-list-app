@@ -25,7 +25,9 @@ const DEFAULT_CONTEXT_STATE = {
     },
     token: ''
   },
-  setUserInfo: (user: IUserWithToken) => { }
+  setUserInfo: (user: IUserWithToken) => { },
+  errorMessage: '', 
+  setErrorMessage: (message: string) => { }
 }
 
 export const Context = createContext<ITodoListContextState>(DEFAULT_CONTEXT_STATE); 

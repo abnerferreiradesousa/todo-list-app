@@ -23,6 +23,8 @@ export interface ITodoListContextState {
     tasksDefault: ITask[]
     taskToEdit: ITask & { isEditing: boolean }
     userInfo: IUserWithToken
+    errorMessage: string 
+    setErrorMessage: (message: string) => void
     setSearch: (value: string) => void
     setTasks: (tasks: ITask[]) => void
     setTasksDefault: (tasks: ITask[]) => void

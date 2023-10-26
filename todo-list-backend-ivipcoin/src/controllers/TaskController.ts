@@ -29,8 +29,9 @@ export default class TaskController {
   }
 
   public async delete(req: INewRequest & { params: { id: string } }, res: Response) {
+    console.log(req.params);
     await this._service.delete(req.params.id);
-    return res.status(StatusCodes.NO_CONTENT);
+    return res.status(StatusCodes.OK).json({ res: "Deletado com sucesso!" });
   }
 
 }
