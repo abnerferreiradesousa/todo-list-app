@@ -20,15 +20,6 @@
 </details>
 
 <details>
-
-<summary><strong>Como usar cada rota?</strong></summary>  
-</br>
-
-[Rotas Documentadas](https://github.com/abnerferreiradesousa/drone-feeder/blob/main/drone-feeder.md)
-
-</details>
-
-<details>
   <summary><strong>Tecnologias utilizadas</strong></summary>
   <br/>
   
@@ -47,14 +38,22 @@
 
 ---
 
-<h3>🗡️ Defafios que enfrentei </h3> 
+<h3>🗡️ Frontend </h3> 
 
 * 🛡️ Configurar o Lombok.
 * 🥊 Testar os endpoints relacionados aos Vídeo.
 
 ---
 
-<h3>✍️ Considerações finais...</h3>
+<h3>✍️ Backend </h3>
 
-<p>Minha principal conquista com esse projeto Java foi poder apreciar o que estou criando, cada linha de código, a forma como estou trabalhando, se tá simples, entendível e organizado.</p>
+<details>
+
+<summary><strong>Como usar cada rota?</strong></summary>  
+</br>
+
+[Rotas Documentadas](https://github.com/abnerferreiradesousa/drone-feeder/blob/main/drone-feeder.md)
+
+</details>
+
 
