@@ -20,7 +20,7 @@ const TaskCard = ({ task, handleEdit }: ITaskCardProps) => {
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>, id: number) => {
     const isDone = e.target.checked;
     setChecked(e.target.checked);
-    
+
     await fetch(`http://localhost:8000/tasks/${id}`, {
       method: 'PUT',
       headers: {
@@ -49,9 +49,36 @@ const TaskCard = ({ task, handleEdit }: ITaskCardProps) => {
     setTasksDefault(newTasks);
   }
 
+  let ultimoNumero = -1; // Inicialize com um valor impossível
+
+  function gerarNumeroNaoConsecutivo() {
+    const min = 0;
+    const max = 4;
+    let numeroAleatorio;
+
+    do {
+      numeroAleatorio = Math.floor(Math.random() * (max - min + 1)) + min;
+    } while (numeroAleatorio === ultimoNumero);
+
+    ultimoNumero = numeroAleatorio; // Atualize o último número gerado
+    return numeroAleatorio;
+  }
+
+  // Exemplo de uso:
+  for (let i = 0; i < 10; i++) {
+    const numero = gerarNumeroNaoConsecutivo();
+    console.log(numero);
+  }
+
+
+  const handleColor = (): string => {
+    const cores = ['#4285F4', '#DB4437', '#F4B400', '#0F9D58'];
+    return cores[gerarNumeroNaoConsecutivo()];
+  }
+
   return (
-    <Grid item borderBottom={6} borderColor={'#DB4437'}>
-      <Card elevation={5}>
+    <Grid item borderLeft={24} borderRight={24} borderColor={handleColor()}>
+      <Card elevation={20}>
         <CardHeader
           action={
             <Checkbox

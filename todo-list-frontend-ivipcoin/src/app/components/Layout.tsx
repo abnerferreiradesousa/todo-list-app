@@ -235,7 +235,7 @@ export default function Layout({ children }: React.PropsWithChildren) {
         {
           pathname == '/CreateTask'
           || (
-            <Grid container display={'flex'} alignItems={'center'} gap={2} marginBottom={2} bgcolor={'white'}>
+            <Grid container display={'flex'} alignItems={'center'} gap={2} marginBottom={2}>
               <Typography>Filtros: </Typography>
               <RadioGroup row>
                 <FormControlLabel

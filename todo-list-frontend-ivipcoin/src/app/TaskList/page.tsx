@@ -14,7 +14,7 @@ const TaskList = () => {
   const router = useRouter();
   const { tasks, setTasks, setTasksDefault, setTaskToEdit } = useContext(Context);
   const [currentPage, setCurrentPage] = useState(1);
-  const [tasksPerPage, _setTasksPerPage] = useState(2);
+  const [tasksPerPage, _setTasksPerPage] = useState(8);
 
   useEffect(() => {
     fetch('http://localhost:8000/tasks', {
