@@ -77,6 +77,8 @@ Deploy do projeto: https://todo-list-app-drab-beta.vercel.app/
 
 <h3>✍️ Backend (Opcional) </h3>
 
+Quer testar a API? Segue a documentação abaixo sobre como usá-lo. Deploy da API: https://todo-list-ofc.onrender.com
+
 <details>
 
 <summary><strong> Rodando Testes Unitários e Cobertura de Testes </strong></summary>  
