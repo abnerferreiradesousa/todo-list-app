@@ -20,10 +20,6 @@ export default function Home() {
         body: JSON.stringify({ email, password })
       });
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
       const data: any = await response.json();
 
       if (data.message) {
