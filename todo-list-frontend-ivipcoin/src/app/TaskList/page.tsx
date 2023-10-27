@@ -7,6 +7,7 @@ import Layout from '../components/Layout';
 import PaginationWrapper from '../components/PaginationWrapper';
 import { useRouter } from 'next/navigation';
 import { ITask } from '../types/ITask';
+import { TODO_API_URI } from '../global';
 
 const TaskList = () => {
   const { userInfo } = useContext(Context);
@@ -23,7 +24,7 @@ const TaskList = () => {
 
         setUserInfo({ ...userObj, user: { email: userObj.email } });
 
-        const response = await fetch('http://localhost:8000/tasks', {
+        const response = await fetch(`${TODO_API_URI}/tasks`, {
           method: 'GET',
           headers: { Authorization: userObj.token }
         });

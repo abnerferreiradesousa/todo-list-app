@@ -7,6 +7,7 @@ import { DeleteOutlined, DriveFileRenameOutline } from '@mui/icons-material';
 import { Context } from '@/contextAPI/Context';
 import { green, orange, red } from '@mui/material/colors';
 import { ITaskCardProps } from '../types/IProps';
+import { TODO_API_URI } from '../global';
 
 
 const TaskCard = ({ task, handleEdit }: ITaskCardProps) => {
@@ -22,7 +23,7 @@ const TaskCard = ({ task, handleEdit }: ITaskCardProps) => {
     setChecked(e.target.checked);
 
     try {
-      const response = await fetch(`http://localhost:8000/tasks/${id}`, {
+      const response = await fetch(`${TODO_API_URI}/tasks/${id}`, {
         method: 'PUT',
         headers: {
           Authorization: userInfo.token,
@@ -47,7 +48,7 @@ const TaskCard = ({ task, handleEdit }: ITaskCardProps) => {
 
   const handleDelete = async (id: number) => {
     try {
-      const response = await fetch(`http://localhost:8000/tasks/${id}`, {
+      const response = await fetch(`${TODO_API_URI}/tasks/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: userInfo.token,

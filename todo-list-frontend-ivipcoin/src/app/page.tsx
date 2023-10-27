@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import FormUser from "./components/FormUser";
 import { useContext, useState } from "react";
 import { Context } from "@/contextAPI/Context";
+import { TODO_API_URI } from "./global";
 import './globals.css';
 
 
@@ -13,7 +14,7 @@ export default function Home() {
 
   const handleUser = async (email: string, password: string) => {
     try {
-      const response = await fetch('http://localhost:8000/users/login', {
+      const response = await fetch(`${TODO_API_URI}/users/login`, {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify({ email, password })
@@ -40,7 +41,7 @@ export default function Home() {
       }
     } catch (error) {
       console.error('Error while logging in:', error);
-      setErrorMessage('Try again later');
+      setErrorMessage('Tente novamente mais tarde!');
     }
   }
 

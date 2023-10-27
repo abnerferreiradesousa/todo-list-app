@@ -10,6 +10,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { TODO_API_URI } from "../global";
 
 const classes = {
   field: {
@@ -52,7 +53,7 @@ const CreateTask = () => {
 
     if (!isValidTitle && !isValidDetails) {
       try {
-        const res = await fetch('http://localhost:8000/tasks', {
+        const res = await fetch(`${TODO_API_URI}/tasks`, {
           method: 'POST',
           headers: {
             Authorization: userInfo.token,
@@ -88,7 +89,7 @@ const CreateTask = () => {
     }
 
     try {
-      const res = await fetch('http://localhost:8000/tasks/' + editedTask._id, {
+      const res = await fetch(`${TODO_API_URI}/tasks/${editedTask._id}`, {
         method: 'PUT',
         headers: {
           Authorization: userInfo.token,

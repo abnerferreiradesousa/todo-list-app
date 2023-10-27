@@ -2,8 +2,9 @@
 import { useContext, useState } from "react";
 import FormUser from "../components/FormUser";
 import { Context } from "@/contextAPI/Context";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import '../globals.css'
+import { TODO_API_URI } from "../global";
 
 const CreateAccount = () => {
   const { setUserInfo } = useContext(Context);
@@ -14,7 +15,7 @@ const CreateAccount = () => {
     setErrorMessage("");
 
     try {
-      const response = await fetch('http://localhost:8000/users', {
+      const response = await fetch(`${TODO_API_URI}/users`, {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify({ email, password })
