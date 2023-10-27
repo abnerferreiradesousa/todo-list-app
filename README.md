@@ -40,15 +40,27 @@ Deploy do projeto: https://todo-list-app-drab-beta.vercel.app/
 <h3>🗡️ Frontend (Opcional) </h3> 
 
 <details>
-
 <summary><strong> Login </strong></summary>  
-</br>
 
-  [login](./images/foto8.png)
-
+  ![login](./images/foto5.png)
 
 </details>
 
+<details>
+<summary><strong> Add tarefas </strong></summary>  
+
+  ![login](./images/foto3.png)
+
+</details>
+
+<details>
+<summary><strong> Marcando tarefas como concluídas </strong></summary>  
+
+  ![login](./images/foto4.png)
+
+  ![login](./images/foto6.png)
+
+</details>
 
 ---
 
