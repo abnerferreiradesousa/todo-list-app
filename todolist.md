@@ -1,6 +1,6 @@
 # Project: todolist
 
-## OBS.: Os tokens presentes não documentão são ilustrativos, você usar a rota de login para gerar o token que dará acesso às outras rotas.
+## OBS.: Os tokens presentes na documentação são ilustrativos, você deve usar a rota de login para gerar o token que dará acesso às outras rotas.
 
 ## End-point: Login
 ### Method: POST
