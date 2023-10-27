@@ -81,6 +81,15 @@ Quer testar a API? Segue a documentação abaixo sobre como usá-lo. Deploy da A
 
 <details>
 
+<summary><strong>Como usar cada rota?</strong></summary>  
+</br>
+
+[Rotas Documentadas](https://github.com/abnerferreiradesousa/todo-list-app/blob/main/todolist.md)
+
+</details>
+
+<details>
+
 <summary><strong> Rodando Testes Unitários e Cobertura de Testes </strong></summary>  
 </br>
 
@@ -89,14 +98,3 @@ Quer testar a API? Segue a documentação abaixo sobre como usá-lo. Deploy da A
 3. Rodando Cobertura de Testes - `npm run test:coverage`.
 
 </details>
-
-<details>
-
-<summary><strong>Como usar cada rota?</strong></summary>  
-</br>
-
-[Rotas Documentadas](https://github.com/abnerferreiradesousa/todo-list-app/blob/main/todolist.md)
-
-</details>
-
-
