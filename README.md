@@ -41,21 +41,13 @@ Deploy do projeto: https://todo-list-app-drab-beta.vercel.app/
 
 <details>
 
-<summary><strong> Rodando Testes Unitários e Cobertura de Testes </strong></summary>  
+<summary><strong> Login </strong></summary>  
 </br>
-
+[login](https://github.com/abnerferreiradesousa/todo-list-app/blob/main/images/foto8.png)
 
 
 </details>
 
-<details>
-
-<summary><strong>Como usar cada rota?</strong></summary>  
-</br>
-
-[Rotas Documentadas](https://github.com/abnerferreiradesousa/drone-feeder/blob/main/drone-feeder.md)
-
-</details>
 
 ---
 
