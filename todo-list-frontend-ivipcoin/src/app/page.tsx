@@ -48,9 +48,9 @@ export default function Home() {
   return (
     <div>
       <FormUser
-        title="Sign in"
+        title="Login"
         buttonText="Login"
-        linkText="Don't have an account yet?"
+        linkText="Ainda não tem conta?"
         linkPath="/CreateAccount"
         handleUser={handleUser}
         errorMessage={errorMessage}

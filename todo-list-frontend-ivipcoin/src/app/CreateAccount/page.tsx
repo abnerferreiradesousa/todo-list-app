@@ -21,10 +21,6 @@ const CreateAccount = () => {
         body: JSON.stringify({ email, password })
       });
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
       const data = await response.json();
 
       if (data.message) {
@@ -39,14 +35,14 @@ const CreateAccount = () => {
       }
     } catch (error) {
       console.error('Error creating account:', error);
-      setErrorMessage('An error occurred while creating the account. Please try again later.');
+      setErrorMessage('Um erro ocorreu ao tentar criar suas conta. Tente novamente mais tarde.');
     }
   }
 
   return (
     <div>
       <FormUser
-        title="Sign up"
+        title="Registre-se"
         buttonText="Criar Conta"
         linkText="Já possui conta?"
         linkPath="/"
