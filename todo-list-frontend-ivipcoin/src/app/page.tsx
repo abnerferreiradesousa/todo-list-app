@@ -21,7 +21,7 @@ export default function Home() {
       });
 
       const data: any = await response.json();
-
+      
       if (data.message) {
         setErrorMessage(data.message);
       } else {
