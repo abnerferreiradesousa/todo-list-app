@@ -2,19 +2,18 @@ import { StatusCodes } from "http-status-codes";
 import { ITask, TaskZodSchema } from "../interfaces/ITask";
 import TaskModel from "../models/TaskModel";
 import { errorMessage } from "../helpers/generateError";
-import { Types } from "mongoose";
+import { Types  } from "mongoose";
 
 
 export default class TaskService {
   
   constructor(private _task: TaskModel) {}
 
-  public async create(task: ITask, id?: string): Promise<ITask & { _id: Types.ObjectId }> { 
+  public async create(task: ITask, id?: string): Promise<ITask & { _id: string }> { 
     const parsedToTask = TaskZodSchema.safeParse(task);
     if(!parsedToTask.success) {
       throw parsedToTask.error;
     }
-
     return this._task.create(task, id);
   }
 

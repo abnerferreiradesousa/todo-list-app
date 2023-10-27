@@ -1,16 +1,13 @@
-// const fakeId = "62e45fe854ac30f03ef53982";
+import { ITask } from '../../../interfaces/ITask';
+
 const fakeId = "aaaaaaaaaaaaaaaaaaaaaaaa";
 
-const taskMock = {
-  title: "Title task 1",
-  details: "Details task 1",
-  isDone: true,
-  userId: "62e4486c5db2ec3d8c01b1cf"
-}
-
-const taskMockWithId = {
-  ...taskMock,
-  id: "62e4486c5db2ec3d8c01b1cf"
+const taskMockWithId: ITask & { _id: string } = {
+  title: 'Title task 1 Title task 1',
+  details: 'Details task 1 Title task 1 Title task 1',
+  userId: "62e4486c5db2ec3d8c01b1cf",
+  _id: "62e4486c5db2ec3d8c01b1cf",
+  isDone: false,
 }
 
 export {
@@ -18,3 +15,11 @@ export {
   taskMockWithId,
   fakeId
 }
+
+
+const taskMock: ITask = {
+  userId: '62e4486c5db2ec3d8c01b1cf',
+  title: 'Title task 1 Title task 1',
+  details: 'Details task 1 Title task 1 Title task 1',
+  isDone: false
+};
