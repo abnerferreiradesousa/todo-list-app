@@ -35,14 +35,14 @@
 
 ---
 
-<h3>🗡️ Frontend </h3> 
+<h3>🗡️ Frontend (Opcional) </h3> 
 
 <details>
 
 <summary><strong> Rodando Testes Unitários e Cobertura de Testes </strong></summary>  
 </br>
 
-[Rotas Documentadas](https://github.com/abnerferreiradesousa/drone-feeder/blob/main/drone-feeder.md)
+
 
 </details>
 
@@ -57,14 +57,16 @@
 
 ---
 
-<h3>✍️ Backend </h3>
+<h3>✍️ Backend (Opcional) </h3>
 
 <details>
 
 <summary><strong> Rodando Testes Unitários e Cobertura de Testes </strong></summary>  
 </br>
 
-[Rotas Documentadas](https://github.com/abnerferreiradesousa/drone-feeder/blob/main/drone-feeder.md)
+1. Entra na pasta backend `cd todo-list-backend-ivipcoin`
+2. Rodando Testes Unitários - `npm run test`.
+3. Rodando Cobertura de Testes - `npm run test:coverage`.
 
 </details>
 
@@ -73,7 +75,7 @@
 <summary><strong>Como usar cada rota?</strong></summary>  
 </br>
 
-[Rotas Documentadas](https://github.com/abnerferreiradesousa/drone-feeder/blob/main/drone-feeder.md)
+[Rotas Documentadas](https://github.com/abnerferreiradesousa/todo-list-app/blob/main/todolist.md)
 
 </details>
 
