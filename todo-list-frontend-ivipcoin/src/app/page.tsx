@@ -39,9 +39,9 @@ export default function Home() {
         }));
         router.push('/TaskList');
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error while logging in:', error);
-      setErrorMessage('Tente novamente mais tarde!');
+      setErrorMessage('Tente novamente mais tarde! ' + error.message);
     }
   }
 
