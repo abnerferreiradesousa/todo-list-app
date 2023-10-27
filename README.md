@@ -4,6 +4,10 @@ Deploy do projeto: https://todo-list-app-drab-beta.vercel.app/
 
 <h3>💥 Rodando o projeto localmente via Docker </h3>
 
+<details>
+<summary><strong> Como? </strong></summary>  
+<br/>
+  
 1. Clone o repositório com o comando:
   - `git clone git@github.com:abnerferreiradesousa/todo-list-app.git`;
     - Entre na pasta do repositório:
@@ -47,9 +51,16 @@ Deploy do projeto: https://todo-list-app-drab-beta.vercel.app/
 </details>
 
 <details>
-<summary><strong> Add tarefas </strong></summary>  
+<summary><strong> Listagem de tarefas </strong></summary>  
 
   ![login](./images/foto3.png)
+
+</details>
+
+<details>
+<summary><strong> Criar nova tarefa </strong></summary>  
+
+  ![login](./images/foto7.png)
 
 </details>
 
