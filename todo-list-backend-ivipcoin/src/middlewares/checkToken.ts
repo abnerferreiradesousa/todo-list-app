@@ -4,7 +4,10 @@ import { errorMessage } from "../helpers/generateError";
 import jwt from 'jsonwebtoken';
 
 
-export const authToken = (req: Request & { user?: UserOmitPassword }, res: Response, next: NextFunction) => {
+export const authToken = (
+	req: Request & { user?: UserOmitPassword }, 
+	res: Response, 
+	next: NextFunction) => {
 	try {
 		const {authorization} = req.headers;
 		if (!authorization) {

@@ -1,4 +1,5 @@
-import { ITodoListContextState, ITask } from '@/app/types/ITask';
+import { ITodoListContextState,  } from '@/app/types/IContext';
+import { ITask } from '@/app/types/ITask';
 import { IUserWithToken } from '@/app/types/IUser';
 import { createContext } from 'react';
 
@@ -28,6 +29,6 @@ const DEFAULT_CONTEXT_STATE = {
   setUserInfo: (user: IUserWithToken) => { },
   errorMessage: '', 
   setErrorMessage: (message: string) => { }
-}
+};
 
 export const Context = createContext<ITodoListContextState>(DEFAULT_CONTEXT_STATE); 

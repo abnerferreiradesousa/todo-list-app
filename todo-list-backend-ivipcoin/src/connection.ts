@@ -7,7 +7,6 @@ const connectToDatabase = (
   mongoDatabaseURI = process.env.MONGO_URI
     || MONGO_DB_URL,
 ) => {
-
   console.log("MONGO_DB_URL", MONGO_DB_URL)
   console.log("MONGO_URI", process.env.MONGO_URI)
   return mongoose.connect(mongoDatabaseURI);

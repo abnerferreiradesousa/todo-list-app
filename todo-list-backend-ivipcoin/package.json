@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "tsc --build",
     "dev": "ts-node-dev src/index.ts",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "mocha -r ts-node/register src/tests/unit/**/*.test.ts --exit -t 60000",
     "test:coverage": "nyc npm run test:dev",
-    "start": "ts-node-dev src/index.ts"
+    "start": "node ./build/src/index.js"
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "1.0.2",

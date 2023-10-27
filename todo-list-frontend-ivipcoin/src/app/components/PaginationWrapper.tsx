@@ -1,12 +1,8 @@
 import React from 'react';
 import { Grid, Pagination, Stack } from '@mui/material';
-import { IPaginationWrapperProps } from '../types/Props';
+import { IPaginationWrapperProps } from '../types/IProps';
 
-const PaginationWrapper: React.FC<IPaginationWrapperProps> = ({
-  totalTasks,
-  postsPerPage,
-  setCurrentPage,
-}) => {
+const PaginationWrapper = ({ totalTasks, postsPerPage, setCurrentPage }: IPaginationWrapperProps) => {
   const handleChange = (_event: React.ChangeEvent<unknown>, value: number) => {
     setCurrentPage(value);
   };

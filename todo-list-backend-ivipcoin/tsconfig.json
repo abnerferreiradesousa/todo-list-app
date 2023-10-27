@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
-    "outDir": "./dist",
+    "outDir": "./build",
     "rootDir": ".",
     "target": "es2019",
     "module": "commonjs",
+    "declaration": true,
     "typeRoots": [
       "src/@types",
       "./node_modules/@types"
@@ -13,5 +14,6 @@
     "strict": true,
     "skipLibCheck": true
   },
+  "include": ["src/**/*"],
   "exclude": ["node_modules"]
 }

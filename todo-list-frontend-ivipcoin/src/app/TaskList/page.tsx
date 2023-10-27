@@ -8,7 +8,6 @@ import PaginationWrapper from '../components/PaginationWrapper';
 import { useRouter } from 'next/navigation';
 import { ITask } from '../types/ITask';
 
-
 const TaskList = () => {
   const { userInfo } = useContext(Context);
   const router = useRouter();
@@ -17,23 +16,33 @@ const TaskList = () => {
   const [tasksPerPage, _setTasksPerPage] = useState(4);
 
   useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const userStr = localStorage.getItem('userInfo');
+        const userObj = userStr ? JSON.parse(userStr) : userInfo;
 
-    const userStr = localStorage.getItem('userInfo');
-    const userObj = userStr ? JSON.parse(userStr) : userInfo;
-    
-    setUserInfo({  ...userObj, user: { email: userObj.email } });
-    fetch('http://localhost:8000/tasks', {
-      method: 'GET',
-      headers: { Authorization: userObj.token }
-    })
-      .then(response => response.json())
-      .then((data: ITask[]) => {
+        setUserInfo({ ...userObj, user: { email: userObj.email } });
+
+        const response = await fetch('http://localhost:8000/tasks', {
+          method: 'GET',
+          headers: { Authorization: userObj.token }
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
         const reversedData = Array.isArray(data) ? data.reverse() : [];
         setTasks(reversedData);
         setTasksDefault([...reversedData]);
-      });
-  }, []);
+      } catch (error) {
+        console.error('Error fetching tasks:', error);
+      }
+    };
 
+    fetchTasks();
+  }, [setTasks, setTasksDefault, setUserInfo]);
 
   const lastTaskIndex = currentPage * tasksPerPage;
   const firstTaskIndex = lastTaskIndex - tasksPerPage;
@@ -49,7 +58,7 @@ const TaskList = () => {
     };
     setTaskToEdit(editedTask);
     router.push('/CreateTask');
-  }
+  };
 
   const NoTasks = () => {
     return (
@@ -62,31 +71,31 @@ const TaskList = () => {
       >
         <Typography variant='h5'>Nenhuma tarefa!</Typography>
       </Grid>
-    )
-  }
+    );
+  };
 
   return (
     <Layout>
-      {currentTasks.length == 0
-        ? <NoTasks />
-        : (
-          <>
-            <Grid container gap={'1rem'} display={'flex'} justifyContent={'center'}>
-              {currentTasks.map((task: ITask) => (
-                <Grid item key={task._id} xs={12} lg={9}>
-                  <TaskCard task={task} handleEdit={handleEdit} />
-                </Grid>
-              ))}
-            </Grid>
-            <PaginationWrapper
-              totalTasks={tasks.length}
-              postsPerPage={tasksPerPage}
-              setCurrentPage={setCurrentPage}
-            />
-          </>
-        )}
+      {currentTasks.length === 0 ? (
+        <NoTasks />
+      ) : (
+        <>
+          <Grid container gap={'1rem'} display={'flex'} justifyContent={'center'}>
+            {currentTasks.map((task: ITask) => (
+              <Grid item key={task._id} xs={12} lg={9}>
+                <TaskCard task={task} handleEdit={handleEdit} />
+              </Grid>
+            ))}
+          </Grid>
+          <PaginationWrapper
+            totalTasks={tasks.length}
+            postsPerPage={tasksPerPage}
+            setCurrentPage={setCurrentPage}
+          />
+        </>
+      )}
     </Layout>
-  )
-}
+  );
+};
 
 export default TaskList;

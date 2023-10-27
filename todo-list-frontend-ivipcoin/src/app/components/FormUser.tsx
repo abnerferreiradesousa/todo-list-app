@@ -1,6 +1,6 @@
 import { Alert, Button, Container, Grid, Link, TextField, Typography } from '@mui/material';
 import { FormEvent, useState } from 'react';
-import { IFormUserProps } from '../types/ITask';
+import { IFormUserProps } from '../types/IProps';
 
 const FormUser = ({
   title,

@@ -1,15 +1,15 @@
 'use client'
-import {
-  TextField,
-  Typography,
-  Container,
-  Button,
-  Grid,
-} from "@mui/material";
 import React, { FormEvent, useContext, useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
 import Layout from "../components/Layout";
 import { Context } from "@/contextAPI/Context";
+import {
+  Button,
+  Container,
+  Grid,
+  TextField,
+  Typography,
+} from "@mui/material";
 
 const classes = {
   field: {
@@ -18,30 +18,29 @@ const classes = {
 };
 
 const CreateTask = () => {
-  const { userInfo } = useContext(Context);
-  const { taskToEdit, tasks } = useContext(Context);
-  const [title, setTitle] = useState("");
-  const [details, setDetails] = useState("");
-  const [titleError, setTitleError] = useState(false);
-  const [detailsError, setDetailsError] = useState(false);
+  const { userInfo, taskToEdit, tasks } = useContext(Context);
   const router = useRouter();
 
+  const [title, setTitle] = useState<string>(taskToEdit.isEditing ? taskToEdit.title : "");
+  const [details, setDetails] = useState<string>(taskToEdit.isEditing ? taskToEdit.details : "");
+  const [titleError, setTitleError] = useState<boolean>(false);
+  const [detailsError, setDetailsError] = useState<boolean>(false);
+
   useEffect(() => {
-    if(taskToEdit.isEditing) {  
+    if (taskToEdit.isEditing) {
       setTitle(taskToEdit.title);
       setDetails(taskToEdit.details);
     }
-  }, [])
-  
+  }, [taskToEdit]);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     setTitleError(false);
     setDetailsError(false);
 
-    const isValidTitle = title == '' || title.length < 10;
-    const isValidDetails = details == '' || details.length < 20;
+    const isValidTitle = title.length < 10;
+    const isValidDetails = details.length < 20;
 
     if (isValidTitle) {
       setTitleError(true);
@@ -52,19 +51,28 @@ const CreateTask = () => {
     }
 
     if (!isValidTitle && !isValidDetails) {
-      fetch('http://localhost:8000/tasks', {
-        method: 'POST',
-        headers: { 
-          Authorization: userInfo.token,
-          'Content-type': 'application/json' 
-        },
-        body: JSON.stringify({ title, details, isDone: false })
-      }).then((res) => res.json())
-      .then((data) => router.push('/TaskList'));
-    } 
+      try {
+        const res = await fetch('http://localhost:8000/tasks', {
+          method: 'POST',
+          headers: {
+            Authorization: userInfo.token,
+            'Content-type': 'application/json'
+          },
+          body: JSON.stringify({ title, details, isDone: false })
+        });
+
+        if (res.ok) {
+          router.push('/TaskList');
+        } else {
+          throw new Error('Network response was not ok');
+        }
+      } catch (error) {
+        console.error('Error creating task:', error);
+      }
+    }
   }
 
-  const handleEdit = (e: FormEvent) => {
+  const handleEdit = async (e: FormEvent) => {
     e.preventDefault();
 
     const { isEditing, ...taskDataToEdit } = taskToEdit;
@@ -79,16 +87,24 @@ const CreateTask = () => {
       tasks[taskIndexToUpdate] = editedTask;
     }
 
-    fetch('http://localhost:8000/tasks/' + editedTask._id, {
-      method: 'PUT',
-      headers: { 
-        Authorization: userInfo.token,
-        'Content-type': 'application/json' 
-      },
-      body: JSON.stringify({ title, details })
-    }).then((res) => res.json())
-    .then((_data) => router.push('/TaskList'));
-    
+    try {
+      const res = await fetch('http://localhost:8000/tasks/' + editedTask._id, {
+        method: 'PUT',
+        headers: {
+          Authorization: userInfo.token,
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify({ title, details })
+      });
+
+      if (res.ok) {
+        router.push('/TaskList');
+      } else {
+        throw new Error('Network response was not ok');
+      }
+    } catch (error) {
+      console.error('Error editing task:', error);
+    }
   }
 
   return (
@@ -108,7 +124,7 @@ const CreateTask = () => {
               variant="outlined"
               color="primary"
               fullWidth
-              helperText={ titleError && "Título deve conter no mínimo 10 caracteres." }
+              helperText={titleError && "Título deve conter no mínimo 10 caracteres."}
               error={titleError}
               required
             />
@@ -122,7 +138,7 @@ const CreateTask = () => {
               multiline
               rows={4}
               fullWidth
-              helperText={ detailsError && "Detalhes deve conter no mínimo 20 caracteres." }
+              helperText={detailsError && "Detalhes deve conter no mínimo 20 caracteres."}
               error={detailsError}
               required
             />
