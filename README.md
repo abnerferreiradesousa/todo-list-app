@@ -4,6 +4,10 @@ Deploy do projeto: https://todo-list-app-drab-beta.vercel.app/
 
 <h3>💥 Rodando o projeto localmente via Docker </h3>
 
+<details>
+<summary><strong> Como? </strong></summary>  
+<br/>
+  
 1. Clone o repositório com o comando:
   - `git clone git@github.com:abnerferreiradesousa/todo-list-app.git`;
     - Entre na pasta do repositório:
@@ -40,19 +44,49 @@ Deploy do projeto: https://todo-list-app-drab-beta.vercel.app/
 <h3>🗡️ Frontend (Opcional) </h3> 
 
 <details>
-
 <summary><strong> Login </strong></summary>  
-</br>
 
-  [login](./images/foto8.png)
-
+  ![login](./images/foto5.png)
 
 </details>
 
+<details>
+<summary><strong> Listagem de tarefas </strong></summary>  
+
+  ![login](./images/foto3.png)
+
+</details>
+
+<details>
+<summary><strong> Criar nova tarefa </strong></summary>  
+
+  ![login](./images/foto7.png)
+
+</details>
+
+<details>
+<summary><strong> Marcando tarefas como concluídas </strong></summary>  
+
+  ![login](./images/foto4.png)
+
+  ![login](./images/foto6.png)
+
+</details>
 
 ---
 
 <h3>✍️ Backend (Opcional) </h3>
+
+Quer testar a API? Segue a documentação abaixo sobre como usá-lo. Deploy da API: https://todo-list-ofc.onrender.com
+
+<details>
+
+<summary><strong>Como usar cada rota?</strong></summary>  
+</br>
+
+[Rotas Documentadas](https://github.com/abnerferreiradesousa/todo-list-app/blob/main/todolist.md)
+
+</details>
 
 <details>
 
@@ -64,14 +98,3 @@ Deploy do projeto: https://todo-list-app-drab-beta.vercel.app/
 3. Rodando Cobertura de Testes - `npm run test:coverage`.
 
 </details>
-
-<details>
-
-<summary><strong>Como usar cada rota?</strong></summary>  
-</br>
-
-[Rotas Documentadas](https://github.com/abnerferreiradesousa/todo-list-app/blob/main/todolist.md)
-
-</details>
-
-
