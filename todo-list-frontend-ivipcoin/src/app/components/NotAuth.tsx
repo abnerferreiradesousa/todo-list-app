@@ -11,7 +11,7 @@ const NotAuth = () => {
     >
       <Grid item>
         <Typography variant="h5" align="center">
-          Você não está autenticado! Por favor, faça{' '}
+          Houve um erro na autenticação! Por favor, faça{' '}
           <Link href="/" color="primary" underline="hover">
             login
           </Link>{' '}

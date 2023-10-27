@@ -1,4 +1,4 @@
-import { Alert, Button, Container, Grid, Link, TextField, Typography } from '@mui/material';
+import { Alert, Button, CircularProgress, Container, Grid, Link, TextField, Typography } from '@mui/material';
 import { FormEvent, useState } from 'react';
 import { IFormUserProps } from '../types/IProps';
 
@@ -14,25 +14,32 @@ const FormUser = ({
   const [password, setPassword] = useState<string>("");
   const [emailError, setEmailError] = useState<boolean>(false);
   const [passwordError, setPasswordError] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     setEmailError(false);
     setPasswordError(false);
 
-    const isValidEmail = !email;
-    if (isValidEmail) {
-      setEmailError(true);
-    }
+    setTimeout(function () {
+      const isValidEmail = !email;
+      if (isValidEmail) {
+        setEmailError(true);
+      }
 
-    const isValidPassword = !password || password.length < 6;
-    if (isValidPassword) {
-      setPasswordError(true);
-    }
+      const isValidPassword = !password || password.length < 6;
+      if (isValidPassword) {
+        setPasswordError(true);
+      }
 
-    if (!isValidEmail && !isValidPassword) {
-      handleUser(email, password);
-    }
+      if (!isValidEmail && !isValidPassword) {
+        handleUser(email, password);
+        setIsLoading(false);
+      }
+    }, 4000);
+
+
   };
 
   return (
@@ -57,6 +64,8 @@ const FormUser = ({
           justifyContent="space-around"
           alignItems="center"
         >
+          {isLoading && <CircularProgress />}
+
           {errorMessage && <Alert severity="info">{errorMessage}</Alert>}
           <Typography variant="h5" component="h1" textAlign="center">
             {title}
